@@ -1,0 +1,19 @@
+<section style="max-width:700px;margin:2rem auto;padding:1rem">
+	<h2>Contact — Let's talk about your space</h2>
+	<p>Send a message and I will get back to you.</p>
+
+	<form [formGroup]="form" (ngSubmit)="submit()" style="display:flex;flex-direction:column;gap:0.75rem;margin-top:1rem">
+		<input formControlName="name" placeholder="Your name" />
+		<div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" style="color:#b00020">Name is required</div>
+
+		<input formControlName="email" placeholder="Email" />
+		<div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" style="color:#b00020">Valid email required</div>
+
+		<textarea formControlName="message" rows="6" placeholder="How can I help?"></textarea>
+		<div *ngIf="form.get('message')?.invalid && form.get('message')?.touched" style="color:#b00020">Please provide a short message</div>
+
+		<button type="submit" [disabled]="submitting">{{ submitting ? 'Sending...' : 'Send Message' }}</button>
+	</form>
+
+	<div *ngIf="success" style="margin-top:1rem;color:green">Thanks — your message was saved.</div>
+</section>

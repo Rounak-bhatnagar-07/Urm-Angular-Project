@@ -5,28 +5,18 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
+import ExcelJS from 'exceljs';
 import { join } from 'node:path';
+import { promises as fs } from 'fs';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+// parse JSON bodies for API endpoints
+app.use(express.json());
 
-/**
- * Serve static files from /browser
- */
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
@@ -34,6 +24,50 @@ app.use(
     redirect: false,
   }),
 );
+
+// API: save contact submissions to an Excel file
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, email, message } = req.body || {};
+    if (!name || !email || !message) return res.status(400).json({ error: 'Missing fields' });
+
+    const dataDir = join(import.meta.dirname, '..', 'data');
+    const filePath = join(dataDir, 'contacts.xlsx');
+    await fs.mkdir(dataDir, { recursive: true });
+
+    const workbook = new ExcelJS.Workbook();
+    try {
+      await workbook.xlsx.readFile(filePath);
+    } catch {
+      // File doesn't exist yet, so create a new workbook.
+    }
+
+    const worksheet = workbook.getWorksheet('Contacts') ?? workbook.addWorksheet('Contacts');
+
+    if (!worksheet.getRow(1).getCell(1).value) {
+      worksheet.columns = [
+        { header: 'Timestamp', key: 'timestamp', width: 28 },
+        { header: 'Name', key: 'name', width: 25 },
+        { header: 'Email', key: 'email', width: 35 },
+        { header: 'Message', key: 'message', width: 60 },
+      ];
+    }
+
+    worksheet.addRow({
+      timestamp: new Date().toISOString(),
+      name,
+      email,
+      message,
+    });
+
+    await workbook.xlsx.writeFile(filePath);
+
+    return res.status(200).json({ ok: true });
+  } catch (err) {
+    console.error('Failed to save contact', err);
+    return res.status(500).json({ error: 'Failed to save' });
+  }
+});
 
 /**
  * Handle all other requests by rendering the Angular application.

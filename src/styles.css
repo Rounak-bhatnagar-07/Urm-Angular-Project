@@ -1,1 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --bg-color: #f8f5f0;
+  --text-color: #2a2a2a;
+  --accent-color: #c5a880;
+  --font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  animation: pageFadeIn 0.8s ease-in-out;
+}
+
+body {
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  animation: imageLift 1.2s ease both;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+a:hover {
+  color: #9c7a55;
+  transform: translateY(-1px);
+  text-decoration: underline;
+}
+
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(197, 168, 128, 0.22);
+}
+
+section, header, footer, .card, .hero {
+  animation: contentFadeIn 0.9s ease both;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes imageLift {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+

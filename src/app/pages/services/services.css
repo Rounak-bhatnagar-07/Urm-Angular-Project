@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#f8f5f0;
+  color:#2d2d2d;
+}
+
+.services-page{
+  width:100%;
+}
+
+/* HERO */
+
+.hero{
+  min-height:80vh;
+  background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+    url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
+
+  background-size:cover;
+  background-position:center;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  padding:40px;
+  /* subtle entrance animation for hero background */
+  animation: heroFade 1.2s ease forwards;
+}
+
+.hero-content{
+  max-width:800px;
+  color:white;
+  opacity:0;
+  transform:translateY(20px);
+  animation: slideInDown 1s ease .2s forwards;
+}
+
+.subtitle{
+  letter-spacing:4px;
+  font-size:.9rem;
+  color:#d7b899;
+}
+
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:5rem;
+  margin:20px 0;
+}
+
+.hero p{
+  font-size:1.2rem;
+  line-height:1.8;
+  margin-bottom:30px;
+}
+
+.hero-btn{
+  display:inline-block;
+  padding:15px 35px;
+  background:#c4a484;
+  color:white;
+  text-decoration:none;
+  border-radius:50px;
+  transition:.3s;
+  transform-origin:center;
+}
+
+.hero-btn:hover{
+  background:#a67c5b;
+  transform:translateY(-4px) scale(1.02);
+}
+
+/* INTRO */
+
+.intro{
+  max-width:900px;
+  margin:100px auto;
+  text-align:center;
+  padding:0 20px;
+}
+
+.intro h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;
+  margin-bottom:20px;
+}
+
+.intro p{
+  color:#666;
+  line-height:1.8;
+}
+
+/* SERVICES */
+
+.grid{
+  max-width:1300px;
+  margin:auto;
+  padding:0 30px;
+
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:30px;
+}
+
+.card{
+  background:white;
+  padding:40px 30px;
+  border-radius:24px;
+
+  box-shadow:
+  0 15px 35px rgba(0,0,0,.06);
+
+  transition:transform .45s cubic-bezier(.2,.9,.3,1), box-shadow .35s;
+  opacity:0;
+  transform:translateX(-30px);
+  animation: slideInLeft 1s ease forwards;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 30px 60px rgba(0,0,0,.08);
+}
+
+.icon{
+  font-size:2rem;
+  margin-bottom:20px;
+  color:#c4a484;
+  transition:transform .35s ease, color .25s;
+}
+
+.card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;
+  margin-bottom:15px;
+}
+
+.card p{
+  color:#666;
+  line-height:1.8;
+}
+
+/* CTA */
+
+.cta{
+  margin:120px auto;
+  max-width:1200px;
+
+  background:#2f2f2f;
+  color:white;
+
+  border-radius:30px;
+  text-align:center;
+
+  padding:80px 40px;
+  opacity:0;
+  transform:translateX(30px);
+  animation: slideInRight 1s ease .15s forwards;
+}
+
+.cta h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;
+  margin-bottom:20px;
+}
+
+.cta p{
+  max-width:700px;
+  margin:auto;
+  line-height:1.8;
+  opacity:.9;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:16px 40px;
+
+  background:#c4a484;
+  color:white;
+
+  text-decoration:none;
+  border-radius:50px;
+  font-weight:600;
+}
+
+.btn:hover{
+  background:#a67c5b;
+}
+
+/* small hover for icons inside cards */
+.card:hover .icon{
+  transform:translateY(-6px) rotate(-6deg) scale(1.05);
+  color:#a67c5b;
+}
+
+/* staggered card entrance */
+.grid .card{
+  will-change:transform,opacity;
+}
+
+/* subtle pulse for CTA button */
+.btn{
+  transition:transform .25s ease, box-shadow .25s;
+}
+.btn:active{
+  transform:translateY(2px) scale(.995);
+}
+
+/* Keyframes */
+@keyframes fadeInUp{
+  from{opacity:0; transform:translateY(18px);} 
+  to{opacity:1; transform:translateY(0);} 
+}
+
+@keyframes slideInDown{
+  from{opacity:0; transform:translateY(-30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes slideInLeft{
+  from{opacity:0; transform:translateX(-40px);}
+  to{opacity:1; transform:translateX(0);}
+}
+
+@keyframes slideInRight{
+  from{opacity:0; transform:translateX(40px);}
+  to{opacity:1; transform:translateX(0);}
+}
+
+@keyframes heroFade{
+  from{filter:brightness(.85) saturate(.9); opacity:0.6}
+  to{filter:brightness(1) saturate(1); opacity:1}
+}
+
+/* Page background gradient with slow movement */
+body{
+  background: linear-gradient(120deg, #f7efe6 0%, #e9d7c2 40%, #c4a484 100%);
+  background-size: 300% 300%;
+  animation: bgShift 18s ease-in-out infinite;
+  color: #2b2b2b;
+}
+
+/* subtle floating for hero section */
+.hero{
+  animation: heroFloat 8s ease-in-out infinite;
+}
+
+@media(max-width:768px){
+
+  .hero h1{
+    font-size:3.5rem;
+  }
+
+  .intro h2,
+  .cta h2{
+    font-size:2.3rem;
+  }
+
+  .cta{
+    margin:80px 20px;
+  }
+}
+
+@keyframes bgShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+@keyframes heroFloat{
+  0%{transform:translateY(0px);} 
+  50%{transform:translateY(-8px);} 
+  100%{transform:translateY(0px);} 
+}
+
+/* Enhanced animated entries and hover effects */
+.hero h1,
+.intro h2,
+.cta h2{
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeInUp 0.9s ease forwards;
+}
+
+.service-card,
+.section-card,
+.card{
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeInUp 0.85s ease forwards;
+  animation-delay: 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.service-card:hover,
+.section-card:hover,
+.card:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 20px 38px rgba(0, 0, 0, 0.14);
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.button,
+.btn,
+.cta-button{
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.button:hover,
+.btn:hover,
+.cta-button:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.16);
+}
+
+.hero::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.24), transparent 45%);
+}
+
+@keyframes fadeInUp{
+  from{opacity:0; transform:translateY(18px);}
+  to{opacity:1; transform:translateY(0);}
+}
