@@ -1,27 +1,25 @@
-import { Component, HostListener, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+import { Header } from './components/header/header';
+import { Footer } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, Header, Footer],
   templateUrl: './app.html',
-  styleUrls: ['./app.css'],
+  styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = signal('spaces-by-nora');
+
   cursorX = 0;
   cursorY = 0;
   isInteractive = false;
 
   @HostListener('document:mousemove', ['$event'])
-  onMouseMove(event: MouseEvent): void {
+  onMouseMove(event: MouseEvent) {
     this.cursorX = event.clientX;
     this.cursorY = event.clientY;
-
-    const target = event.target as HTMLElement | null;
-    this.isInteractive = !!target?.closest(
-      'a, button, input, textarea, select, .btn-primary, .btn-secondary, .nav-btn, .service-card, .portfolio-card, .brand, .custom-cursor'
-    );
   }
 }

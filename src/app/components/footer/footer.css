@@ -1,0 +1,141 @@
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 40px 8% 20px;
+  min-height: 150px;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 24px;
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.logo-box img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logo-box h2 {
+  color: #d6a84f;
+  margin-bottom: 4px;
+}
+
+.logo-box p {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.footer-text {
+  color: #cfcfcf;
+  line-height: 1.8;
+  margin-bottom: 25px;
+}
+
+.footer-box h3 {
+  color: #d6a84f;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.footer-box h3::after {
+  content: '';
+  width: 45px;
+  height: 3px;
+  background: #d6a84f;
+  display: block;
+  margin-top: 8px;
+}
+
+.footer-box ul {
+  list-style: none;
+}
+
+.footer-box ul li {
+  margin: 12px 0;
+}
+
+.footer-box ul li a {
+  color: #ddd;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-box ul li a:hover {
+  color: #d6a84f;
+  padding-left: 8px;
+}
+
+.footer-box p {
+  color: #ddd;
+  margin: 12px 0;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a {
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+.social-icons a:hover {
+  background: #d6a84f;
+  transform: translateY(-5px);
+}
+
+.newsletter {
+  display: flex;
+  margin-top: 20px;
+}
+
+.newsletter input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  outline: none;
+  border-radius: 5px 0 0 5px;
+}
+
+.newsletter button {
+  padding: 12px 18px;
+  background: #d6a84f;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+}
+
+.newsletter button:hover {
+  background: #b88b37;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 25px;
+  color: #bbb;
+  font-size: 14px;
+}

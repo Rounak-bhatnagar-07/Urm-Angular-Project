@@ -1,4 +1,6 @@
 <div class="site-shell">
+
+  <!-- Custom Cursor (keep this here if it's global) -->
   <div
     class="custom-cursor"
     [class.custom-cursor--active]="isInteractive"
@@ -8,26 +10,15 @@
     <span></span>
   </div>
 
-  <header class="top-nav">
-    <div class="brand">
-      <span class="brand-mark">S</span>
-      <div>
-        <p class="eyebrow">Interior Design Studio</p>
-        <h3>Spaces by Nora</h3>
-      </div>
-    </div>
+  <!-- HEADER COMPONENT -->
+<app-header></app-header>
 
-    <nav class="nav-links">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      <a routerLink="/about" routerLinkActive="active">About</a>
-      <a routerLink="/services" routerLinkActive="active">Services</a>
-      <a routerLink="/contact" routerLinkActive="active">Contact</a>
-    </nav>
+<!-- PAGE CONTENT -->
+<!-- <main class="app-content"> -->
+  <router-outlet></router-outlet>
+<!-- </main> -->
 
-    <a class="nav-btn" routerLink="/contact">Book a Consultation</a>
-  </header>
+<!-- FOOTER COMPONENT -->
+<app-footer></app-footer>
 
-  <main>
-    <router-outlet></router-outlet>
-  </main>
 </div>
