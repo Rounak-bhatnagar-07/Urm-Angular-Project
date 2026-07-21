@@ -8,11 +8,14 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-
+import { HeroComponent } from './components/hero/hero.component';
+import{ TestimonialComponent } from './components/testimonial/testimonial.component';
+import{PortfolioComponent} from './components/portfolio/portfolio.component';
+import{ContactComponent,} from './components/contact/contact.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [HeroComponent, TestimonialComponent, PortfolioComponent, ContactComponent],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })

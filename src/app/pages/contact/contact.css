@@ -1,292 +1,525 @@
-input, textarea {
-	width: 100%;
-	padding: 0.6rem;
-	border: 1px solid #ddd;
-	border-radius: 6px;
-	font-size: 1rem;
-	transition: box-shadow 250ms ease, transform 250ms ease, border-color 250ms ease;
+/* ==============================
+   CONTACT PAGE
+============================== */
+
+.contact-container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:2rem;
+    background:linear-gradient(135deg,#eef5ff,#dcecff,#f8fbff);
 }
 
+/* ==============================
+   Glass Contact Card
+============================== */
 
-/* floating label base */
-.field-group {
-	position: relative;
-	margin-bottom: 0.9rem;
-}
-.field-group label {
-	position: absolute;
-	left: 0.75rem;
-	top: 0.6rem;
-	font-size: 0.9rem;
-	color: #888;
-	pointer-events: none;
-	transition: transform 180ms ease, font-size 180ms ease, top 180ms ease, color 180ms ease;
-	background: white;
-	padding: 0 0.25rem;
-}
-.field-group input:not(:placeholder-shown) + label,
-.field-group textarea:not(:placeholder-shown) + label,
-.field-group input:focus + label,
-.field-group textarea:focus + label {
-	transform: translateY(-56%) scale(0.92);
-	top: 0.18rem;
-	color: #b76bff;
-}
+.contact-card{
+    position:relative;
+    width:100%;
+    max-width:720px;
+    padding:2.5rem;
+    border-radius:28px;
+    overflow:hidden;
 
-button {
-	padding: 0.6rem 1rem;
-	border: 0;
-	background: linear-gradient(90deg,#ff7a7a,#b76bff);
-	color: white;
-	border-radius: 6px;
-	cursor: pointer;
-	transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms ease, background-position 300ms ease;
-	background-size: 200% 100%;
-	background-position: 0% 50%;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.35);
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.08),
+        0 10px 25px rgba(0,0,0,.05);
+
+    animation:cardReveal .9s ease forwards;
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease;
 }
 
-button[type="submit"] {
-	width: 100%;
-	max-width: 240px;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	text-transform: uppercase;
-	letter-spacing: 0.02em;
+.contact-card:hover{
+    transform:translateY(-8px);
+    box-shadow:
+        0 35px 70px rgba(0,0,0,.12),
+        0 15px 35px rgba(79,70,229,.12);
 }
 
-button[disabled] {
-	opacity: 0.7;
-	cursor: default;
+/* Animated border */
+
+.contact-card::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+
+    background:linear-gradient(
+        120deg,
+        #ff7a7a,
+        #b76bff,
+        #4f46e5,
+        #00d4ff,
+        #ff7a7a
+    );
+
+    background-size:300% 300%;
+    animation:borderMove 8s linear infinite;
+    z-index:-2;
 }
 
-/* responsive form grid */
-.contact-form-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 0.9rem;
-}
-@media (max-width: 720px) {
-	.contact-form-grid { grid-template-columns: 1fr; }
-}
-
-/* helper & validation states */
-.help-text { font-size: 0.85rem; color: #666; margin-top: 0.25rem; }
-.input-error { border-color: #ff6b6b; box-shadow: 0 6px 18px rgba(255,107,107,0.06); }
-.error-text { color: #ff4d4f; font-size: 0.85rem; margin-top: 0.25rem; }
-.success-state { border-color: #4ade80; box-shadow: 0 8px 20px rgba(74,222,128,0.08); }
-
-/* subtle success animation for submit */
-.submit-success {
-	animation: successPulse 900ms cubic-bezier(.2,.9,.3,1) both;
-}
-@keyframes successPulse {
-	0% { transform: scale(1); box-shadow: 0 0 0 rgba(74,222,128,0.18); }
-	50% { transform: scale(1.02); box-shadow: 0 14px 40px rgba(74,222,128,0.12); }
-	100% { transform: scale(1); box-shadow: 0 6px 18px rgba(74,222,128,0.06); }
+.contact-card::after{
+    content:"";
+    position:absolute;
+    inset:2px;
+    border-radius:26px;
+    background:rgba(255,255,255,.85);
+    z-index:-1;
 }
 
-/* dark theme support */
-.dark-theme input, .dark-theme textarea {
-	background: #121212; border-color: #2a2a2a; color: #e6e6e6;
-}
-.dark-theme label { color: #bdbdbd; background: #121212; }
-.dark-theme button { color: #111; }
+/* ==============================
+   Headings
+============================== */
 
-/* accessibility: respect prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-	* { transition: none !important; animation: none !important; }
-}
-
-/* Slide-in animation for form container and fields */
-.contact-form {
-	animation: slideInUp 520ms cubic-bezier(.2,.9,.3,1) both;
+h2{
+    font-size:2rem;
+    margin-bottom:.5rem;
+    color:#222;
+    animation:fadeDown .8s ease;
 }
 
-.contact-field {
-	transform: translateY(14px);
-	opacity: 0;
-	animation: fieldFadeUp 420ms cubic-bezier(.2,.9,.3,1) both;
-}
-.contact-field:nth-child(1) { animation-delay: 0s; }
-.contact-field:nth-child(2) { animation-delay: 0.06s; }
-.contact-field:nth-child(3) { animation-delay: 0.12s; }
-.contact-field:nth-child(4) { animation-delay: 0.18s; }
-
-/* Focus effects */
-input:focus, textarea:focus {
-	outline: none;
-	box-shadow: 0 6px 18px rgba(183,107,255,0.12), 0 2px 6px rgba(255,122,122,0.06);
-	border-color: #b76bff;
-	transform: translateY(-3px);
+.subtitle{
+    color:#666;
+    margin-bottom:2rem;
+    animation:fadeDown .9s ease;
 }
 
-/* Button hover/active micro-interactions */
-button:hover:not([disabled]) {
-	transform: translateY(-4px) scale(1.01);
-	box-shadow: 0 10px 30px rgba(183,107,255,0.14), 0 4px 12px rgba(255,122,122,0.08);
-	background-position: 100% 50%;
-}
-button:active:not([disabled]){
-	transform: translateY(-1px) scale(.995);
-	box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+/* ==============================
+   Form Layout
+============================== */
+
+.contact-form{
+    animation:slideInUp .8s ease;
 }
 
-@keyframes slideInUp {
-	from { transform: translateY(18px); opacity: 0; }
-	to   { transform: translateY(0);     opacity: 1; }
+.contact-form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1rem;
 }
 
-@keyframes fieldFadeUp {
-	from { transform: translateY(14px); opacity: 0; }
-	to   { transform: translateY(0);     opacity: 1; }
+@media(max-width:720px){
+    .contact-form-grid{
+        grid-template-columns:1fr;
+    }
 }
 
-/* Utility: staggered slide when JavaScript toggles class */
-.slide-enter .contact-field { animation-play-state: running; }
-.contact-container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(
-    135deg,
-    #f5f7fa 0%,
-    #e4ecfb 100%
-  );
-  padding: 2rem;
+/* ==============================
+   Floating Fields
+============================== */
+
+.form-group,
+.field-group{
+    position:relative;
+    margin-bottom:1.5rem;
 }
 
-.contact-card {
-  width: 100%;
-  max-width: 700px;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+.contact-field{
+    opacity:0;
+    transform:translateY(30px);
+    animation:fieldReveal .6s ease forwards;
 }
 
-h2 {
-  margin-bottom: 0.5rem;
-  font-size: 2rem;
-}
+.contact-field:nth-child(1){animation-delay:.1s;}
+.contact-field:nth-child(2){animation-delay:.2s;}
+.contact-field:nth-child(3){animation-delay:.3s;}
+.contact-field:nth-child(4){animation-delay:.4s;}
+.contact-field:nth-child(5){animation-delay:.5s;}
 
-.subtitle {
-  color: #666;
-  margin-bottom: 2rem;
-}
-
-.form-group {
-  position: relative;
-  margin-bottom: 1.7rem;
-}
+/* ==============================
+   Inputs
+============================== */
 
 input,
-textarea {
-  width: 100%;
-  padding: 16px;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  outline: none;
-  font-size: 1rem;
-  transition: 0.3s;
-  background: transparent;
+textarea{
+    width:100%;
+    padding:16px;
+    border-radius:14px;
+
+    background:rgba(255,255,255,.75);
+
+    border:2px solid rgba(180,180,180,.35);
+
+    font-size:1rem;
+    outline:none;
+
+    transition:
+        transform .35s,
+        border-color .35s,
+        box-shadow .35s,
+        background .35s;
+}
+
+textarea{
+    resize:vertical;
+    min-height:130px;
+}
+
+input:hover,
+textarea:hover{
+    border-color:#b76bff;
+    transform:translateY(-2px);
 }
 
 input:focus,
-textarea:focus {
-  border-color: #4f46e5;
+textarea:focus{
+    border-color:#4f46e5;
+
+    background:#fff;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(79,70,229,.12),
+        0 0 0 4px rgba(79,70,229,.08);
 }
 
-label {
-  position: absolute;
-  left: 14px;
-  top: 14px;
-  background: white;
-  padding: 0 6px;
-  color: #777;
-  transition: 0.3s ease;
-  pointer-events: none;
+/* ==============================
+   Floating Labels
+============================== */
+
+label{
+    position:absolute;
+    left:14px;
+    top:15px;
+
+    padding:0 6px;
+
+    background:white;
+
+    color:#777;
+
+    pointer-events:none;
+
+    transition:.3s ease;
 }
 
-input:focus + label,
-input:not(:placeholder-shown) + label,
-textarea:focus + label,
-textarea:not(:placeholder-shown) + label {
-  top: -10px;
-  font-size: 12px;
-  color: #4f46e5;
+input:focus+label,
+textarea:focus+label,
+input:not(:placeholder-shown)+label,
+textarea:not(:placeholder-shown)+label{
+
+    top:-10px;
+    left:12px;
+
+    font-size:12px;
+
+    color:#4f46e5;
+
+    transform:scale(.92);
 }
 
-.error {
-  color: #dc2626;
-  display: block;
-  margin-top: 6px;
-  font-size: 0.85rem;
+/* ==============================
+   Validation
+============================== */
+
+.error{
+    color:#dc2626;
+    font-size:.85rem;
+    margin-top:6px;
 }
 
-.counter {
-  text-align: right;
-  margin-top: 5px;
-  font-size: 0.8rem;
-  color: #888;
+.input-error{
+    border-color:#ff4d4f;
 }
 
-button {
-  width: 100%;
-  border: none;
-  background: #4f46e5;
-  color: white;
-  padding: 14px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s;
+.success-state{
+    border-color:#22c55e;
+
+    box-shadow:
+        0 0 15px rgba(34,197,94,.2);
 }
 
-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  background: #4338ca;
+.help-text{
+    font-size:.85rem;
+    color:#777;
 }
 
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.counter{
+    margin-top:6px;
+    text-align:right;
+    color:#888;
+    font-size:.8rem;
 }
 
-.loader {
-  width: 22px;
-  height: 22px;
-  border: 3px solid rgba(255,255,255,.4);
-  border-top: 3px solid #fff;
-  border-radius: 50%;
-  display: inline-block;
-  animation: spin .8s linear infinite;
+/* ==============================
+   Button
+============================== */
+
+button{
+    position:relative;
+    overflow:hidden;
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        #ff7a7a,
+        #b76bff,
+        #4f46e5
+    );
+
+    background-size:250%;
+
+    color:#fff;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    transition:
+        transform .35s,
+        box-shadow .35s,
+        background-position .5s;
 }
 
-.success-box {
-  margin-top: 1rem;
-  padding: 15px;
-  background: #ecfdf5;
-  border: 1px solid #10b981;
-  color: #065f46;
-  border-radius: 12px;
-  animation: slideUp .4s ease;
+button:hover:not(:disabled){
+
+    background-position:right;
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 18px 35px rgba(79,70,229,.25);
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+button:active:not(:disabled){
+
+    transform:scale(.98);
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+button:disabled{
+
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+/* Shine Effect */
+
+button::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:60%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.5),
+        transparent
+    );
+
+    transition:.7s;
+}
+
+button:hover::before{
+
+    left:150%;
+}
+
+/* ==============================
+   Loader
+============================== */
+
+.loader{
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    border:3px solid rgba(255,255,255,.4);
+
+    border-top-color:#fff;
+
+    animation:spin .8s linear infinite;
+}
+
+/* ==============================
+   Success Box
+============================== */
+
+.success-box{
+
+    margin-top:1.2rem;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    color:#065f46;
+
+    background:#ecfdf5;
+
+    border:1px solid #10b981;
+
+    animation:successPop .6s ease;
+}
+
+/* ==============================
+   Dark Theme
+============================== */
+
+.dark-theme .contact-card::after{
+    background:#181818;
+}
+
+.dark-theme h2{
+    color:#fff;
+}
+
+.dark-theme .subtitle{
+    color:#bbb;
+}
+
+.dark-theme input,
+.dark-theme textarea{
+
+    background:#121212;
+
+    color:#eee;
+
+    border-color:#333;
+}
+
+.dark-theme label{
+
+    background:#181818;
+
+    color:#bbb;
+}
+
+/* ==============================
+   Reduced Motion
+============================== */
+
+@media(prefers-reduced-motion:reduce){
+
+*{
+    animation:none!important;
+    transition:none!important;
+}
+
+}
+
+/* ==============================
+   Animations
+============================== */
+
+@keyframes cardReveal{
+
+from{
+    opacity:0;
+    transform:translateY(40px) scale(.96);
+}
+
+to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+
+}
+
+@keyframes slideInUp{
+
+from{
+    opacity:0;
+    transform:translateY(25px);
+}
+
+to{
+    opacity:1;
+    transform:translateY(0);
+}
+
+}
+
+@keyframes fieldReveal{
+
+from{
+    opacity:0;
+    transform:translateY(25px);
+}
+
+to{
+    opacity:1;
+    transform:translateY(0);
+}
+
+}
+
+@keyframes fadeDown{
+
+from{
+    opacity:0;
+    transform:translateY(-15px);
+}
+
+to{
+    opacity:1;
+    transform:translateY(0);
+}
+
+}
+
+@keyframes successPop{
+
+0%{
+    opacity:0;
+    transform:scale(.9);
+}
+
+70%{
+    transform:scale(1.03);
+}
+
+100%{
+    opacity:1;
+    transform:scale(1);
+}
+
+}
+
+@keyframes spin{
+
+to{
+    transform:rotate(360deg);
+}
+
+}
+
+@keyframes borderMove{
+
+0%{
+    background-position:0% 50%;
+}
+
+50%{
+    background-position:100% 50%;
+}
+
+100%{
+    background-position:0% 50%;
+}
+
 }

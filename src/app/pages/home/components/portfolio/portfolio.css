@@ -1,0 +1,206 @@
+/* =====================================================
+   Modern Premium Portfolio Section
+   Light Theme | Glassmorphism | Modern UI
+===================================================== */
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+.portfolio{
+position:relative;
+overflow:hidden;
+padding:100px 0;
+background:
+radial-gradient(circle at 10% 10%,rgba(99,172,255,.18),transparent 35%),
+radial-gradient(circle at 90% 90%,rgba(140,233,207,.18),transparent 35%),
+linear-gradient(135deg,#f8fbff,#ffffff,#f4faff);
+}
+
+.portfolio::before,
+.portfolio::after{
+content:"";
+position:absolute;
+border-radius:50%;
+filter:blur(120px);
+z-index:0;
+}
+
+.portfolio::before{
+width:420px;
+height:420px;
+left:-140px;
+top:-120px;
+background:#9dd2ff;
+opacity:.3;
+animation:blob1 10s infinite alternate;
+}
+
+.portfolio::after{
+width:350px;
+height:350px;
+right:-120px;
+bottom:-120px;
+background:#b6f0df;
+opacity:.25;
+animation:blob2 12s infinite alternate;
+}
+
+@keyframes blob1{
+from{transform:translate(0,0);}
+to{transform:translate(60px,-40px);}
+}
+@keyframes blob2{
+from{transform:translate(0,0);}
+to{transform:translate(-50px,40px);}
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(35px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.section-heading{
+position:relative;
+text-align:center;
+max-width:700px;
+margin:0 auto 60px;
+z-index:2;
+animation:fadeUp .8s ease;
+}
+
+.section-heading::after{
+content:"";
+display:block;
+width:90px;
+height:5px;
+margin:18px auto 0;
+border-radius:50px;
+background:linear-gradient(90deg,#5ea6ff,#72d9ff,#90e6ca);
+}
+
+.section-heading h2{
+font-size:2.8rem;
+color:#1f2d3d;
+margin-bottom:15px;
+}
+
+.section-heading p{
+color:#667085;
+line-height:1.7;
+}
+
+.portfolio-grid{
+position:relative;
+z-index:2;
+display:grid;
+grid-template-columns:1.4fr 1fr 1fr;
+gap:24px;
+}
+
+.portfolio-card{
+position:relative;
+overflow:hidden;
+border-radius:24px;
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(16px);
+border:1px solid rgba(255,255,255,.6);
+box-shadow:0 18px 45px rgba(70,110,180,.12);
+transition:.45s;
+animation:fadeUp .7s ease both;
+}
+
+.portfolio-card:nth-child(2){animation-delay:.15s;}
+.portfolio-card:nth-child(3){animation-delay:.3s;}
+.portfolio-card:nth-child(4){animation-delay:.45s;}
+
+.portfolio-card::before{
+content:"";
+position:absolute;
+inset:-2px;
+border-radius:26px;
+background:linear-gradient(135deg,#69b4ff,#8fe6d0,#d6f2ff);
+z-index:-1;
+opacity:0;
+transition:.4s;
+}
+
+.portfolio-card::after{
+content:"";
+position:absolute;
+top:-120%;
+left:-70%;
+width:60%;
+height:300%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+transform:rotate(25deg);
+transition:1s;
+}
+
+.portfolio-card:hover::after{left:150%;}
+.portfolio-card:hover::before{opacity:1;}
+
+.portfolio-card:hover{
+transform:translateY(-14px) scale(1.03);
+box-shadow:0 35px 70px rgba(90,140,220,.2);
+}
+
+.large{grid-row:span 2;}
+
+.flip-card{perspective:1200px;height:260px;}
+.large.flip-card{height:560px;}
+
+.flip-card-inner{
+position:relative;
+width:100%;
+height:100%;
+transform-style:preserve-3d;
+transition:transform .9s;
+}
+
+.flip-card:hover .flip-card-inner{
+transform:rotateY(180deg);
+}
+
+.flip-card-front,.flip-card-back{
+position:absolute;
+inset:0;
+border-radius:24px;
+overflow:hidden;
+backface-visibility:hidden;
+}
+
+.flip-card-front img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:1s;
+animation:floating 6s ease-in-out infinite;
+}
+
+.portfolio-card:hover img{
+transform:scale(1.12);
+}
+
+@keyframes floating{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.04);}
+}
+
+.flip-card-back{
+transform:rotateY(180deg);
+display:flex;
+justify-content:center;
+align-items:center;
+padding:28px;
+text-align:center;
+color:white;
+background:linear-gradient(135deg,#5fa7ff,#72d8ff,#8ee5cf);
+}
+
+.flip-card-back h4{margin-bottom:10px;font-size:1.5rem;}
+.flip-card-back p{line-height:1.7;}
+
+@media(max-width:900px){
+.portfolio-grid{grid-template-columns:1fr;}
+.large{grid-row:auto;}
+.large.flip-card{height:260px;}
+}

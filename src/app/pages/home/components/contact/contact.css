@@ -561,7 +561,7 @@ img {
   gap: 50px;
   padding: 60px;
   border-radius: 30px;
-  background: linear-gradient(135deg, #f7f1e7, #fff);
+  background: linear-gradient(135deg, #e6970f, #db0f0f);
 }
 
 .contact-form {
@@ -879,4 +879,3 @@ img {
     left: 8px;
   }
 }
-
